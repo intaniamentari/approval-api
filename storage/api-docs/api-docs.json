@@ -1,0 +1,240 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Dokumentasi API",
+        "description": "Lorem Ipsum",
+        "contact": {
+            "email": "hi.wasissubekti02@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/expense/{id}/approve": {
+            "patch": {
+                "tags": [
+                    "Expense"
+                ],
+                "summary": "Update expense",
+                "description": "Update expense",
+                "operationId": "b98f89f2211d4a1ee2f97ecb07f9061c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID expense",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "approver_id": {
+                                        "description": "Approver ID",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful update expense stage"
+                    }
+                }
+            }
+        },
+        "/approval-stages": {
+            "post": {
+                "tags": [
+                    "Approval Stage"
+                ],
+                "summary": "Create approval stage",
+                "description": "Create new approver user",
+                "operationId": "283749e8aa6a340314b5065badec97de",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "approver_id": {
+                                        "description": "Approver ID",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful create approval stage"
+                    }
+                }
+            }
+        },
+        "/approval-stages/{id}": {
+            "put": {
+                "tags": [
+                    "Approval Stage"
+                ],
+                "summary": "Update approval stage",
+                "description": "Update approval stage",
+                "operationId": "01690bcced7bcffff9134b96b1cba57a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID Approval Stage",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "approver_id": {
+                                        "description": "Approver ID",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful update approval stage"
+                    }
+                }
+            }
+        },
+        "/approvers": {
+            "post": {
+                "tags": [
+                    "Approver"
+                ],
+                "summary": "Create Approver",
+                "description": "Create new approver user",
+                "operationId": "8325e46c6d4ab7f9f2622dcaa27ccf7f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "User's name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful create new Approver"
+                    }
+                }
+            }
+        },
+        "/expense": {
+            "post": {
+                "tags": [
+                    "Expense"
+                ],
+                "summary": "Create expense",
+                "description": "Create expense",
+                "operationId": "f112bba5533d6ea2add5ee4569eb9c32",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "amount": {
+                                        "description": "amount expense (minimum value = 1)",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful create expense"
+                    }
+                }
+            }
+        },
+        "/expense/{id}": {
+            "get": {
+                "tags": [
+                    "Expense"
+                ],
+                "summary": "Detail Expense",
+                "description": "Detail Expense",
+                "operationId": "aa8b1d54759d18370f1a7d0746d36832",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID expense",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful get data expense"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Expense",
+            "description": "Expense"
+        },
+        {
+            "name": "Approval Stage",
+            "description": "Approval Stage"
+        },
+        {
+            "name": "Approver",
+            "description": "Approver"
+        }
+    ]
+}
