@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ExpenseResource;
 use App\Repositories\Contracts\ExpenseRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -48,8 +49,9 @@ class ExpenseController extends Controller
             $expense = $this->expenseStageRepository->createExpense($data);
 
             return response()->json([
+                'status' => 201,
                 'message' => 'Success create new Expense',
-                'data' => $expense
+                'data' => new ExpenseResource($expense)
             ], 201);
 
         } catch (ValidationException $e) {
@@ -80,11 +82,12 @@ class ExpenseController extends Controller
         *  )
         */
     public function show($id){
-        $approvalStage = $this->expenseStageRepository->getExpense($id);
+        $getExpense = $this->expenseStageRepository->getExpense($id);
 
         return response()->json([
-            'message' => 'Success get data expense',
-            'data' => $approvalStage
-        ], 201);
+            'status' => 200,
+            'message' => 'Success get data Expense',
+            'data' => new ExpenseResource($getExpense)
+        ], 200);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ApprovalStageResource;
 use App\Models\Approval;
 use App\Models\ApprovalStage;
 use App\Repositories\Contracts\ApprovalStageRepositoryInterface;
@@ -51,8 +52,9 @@ class ApprovalStageController extends Controller
             $approvalStage = $this->approvalStageRepository->createApprovalStage($data);
 
             return response()->json([
-                'message' => 'Success create new Approval Stage',
-                'data' => $approvalStage
+                'status' => 201,
+                'message' => 'Approval stage created successfully.',
+                'data' => new ApprovalStageResource($approvalStage)
             ], 201);
 
         } catch (ValidationException $e) {
@@ -102,8 +104,9 @@ class ApprovalStageController extends Controller
             $approvalStage = $this->approvalStageRepository->updateApprovalStage($id, $data);
 
             return response()->json([
-                'message' => 'Success update Approval Stage',
-                'data' => $approvalStage
+                'status' => 200,
+                'message' => 'Approval stage updated successfully.',
+                'data' => new ApprovalStageResource($approvalStage)
             ], 200);
         } catch (ValidationException $e) {
             return response()->json([

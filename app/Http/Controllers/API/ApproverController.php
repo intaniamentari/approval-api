@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ApproverResource;
 use App\Repositories\Contracts\ApproverRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -48,9 +49,12 @@ class ApproverController extends Controller
             $approver = $this->approverRepository->createApprover($data);
 
             return response()->json([
+                'status' => 201,
                 'message' => 'Success create new Approver',
-                'data' => $approver
+                'data' => new ApproverResource($approver)
             ], 201);
+
+            return new ApproverResource($approver);
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation Error',

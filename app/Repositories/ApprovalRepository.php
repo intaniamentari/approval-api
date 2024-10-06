@@ -12,11 +12,6 @@ class ApprovalRepository implements ApprovalRepositoryInterface
 {
     public function updateApprovalStatus($id, $approver_id)
     {
-        info([
-            '🌹🌹🌹 ',
-            $approver_id
-        ]);
-
         // get newest tracking approval expense
         $approval = Approval::where('expense_id', $id)->orderBy('id', 'desc')->first();
 

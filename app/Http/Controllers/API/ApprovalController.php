@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ApprovalResource;
+use App\Models\Expense;
 use App\Repositories\Contracts\ApprovalRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -52,17 +54,19 @@ class ApprovalController extends Controller
                 'approver_id' => 'required|numeric'
             ]);
 
-            info(`🌹 approver id = {$request->approver_id}`);
-
             $approvalStage = $this->approvalRepository->updateApprovalStatus($id, $request->approver_id);
+
+            $expense = Expense::find($id);
 
             if($approvalStage == 'success'){
                 return response()->json([
+                    'status' => 200,
                     'message' => 'Success update Approval Stage',
-                    'data' => $approvalStage
+                    'data' => new ApprovalResource($expense)
                 ], 200);
             } else {
                 return response()->json([
+                    'status' => 422,
                     'message' => 'Approver does not have permission to change status',
                 ], 422);
             }
