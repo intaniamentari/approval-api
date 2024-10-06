@@ -42,19 +42,5 @@ class ApprovalRepository implements ApprovalRepositoryInterface
         } else {
             return 'failed';
         }
-
-        // $previousExpense = Expense::where('id', '<', $id)
-        //     ->orderBy('id', 'desc')
-        //     ->first();
-
-        // if ($previousExpense && $previousExpense->status_id == 1) {
-        //     return response()->json([
-        //         'message' => 'Cannot update. Previous expense status is still 1.'
-        //     ], 400);
-        // }
-
-        // $updated = Expense::where('id', $id)->update($data);
-
-        // return $updated;
     }
 }
